@@ -84,16 +84,15 @@ for i in tqdm.tqdm(range(0, len(df))):
 
     if 13 in np.unique(res):
         res = np.where(res == 13, 7 , res)
-        print('_____Наложили основной трек на саб трек______')
+        print('наложение основной колеи на колею неосновную')
 
     if 16 in np.unique(res):
         res = np.where(res == 16, 6, res)
-        print('_____Наложили поезд на саб трек______')
+        print('наложение поезда на неосновную колею')
 
     if 17 in np.unique(res):
         res = np.where(res == 17, 7, res)
-        print('_____Наложили поезд на саб трек______')
-
+        print('наложение поезда на основную колею')
 
     resized_mask = skimage.transform.resize(res,
                                             input_shape,
@@ -103,5 +102,4 @@ for i in tqdm.tqdm(range(0, len(df))):
                                             preserve_range=True,
                                             order=0)
 
-    print(np.unique(resized_mask))
     cv2.imwrite(f'./out/{str(test_path[i]).split("/")[-1]}', resized_mask)
